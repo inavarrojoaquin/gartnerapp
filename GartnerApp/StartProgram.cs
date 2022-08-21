@@ -1,4 +1,10 @@
-﻿public class StartProgram
+﻿using System.Reflection;
+using System.Text;
+using System.Xml;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
+
+public class StartProgram
 {
     private string[] args;
 
@@ -23,7 +29,32 @@
         {
             if (args[1].ToLower() == "capterra")
             {
-                Console.WriteLine("Source: ", args[2]);
+                var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
+
+                var targetParent = currentDirectory.Parent.Parent.Parent.Parent.Parent;
+
+                string inputPath = args[2];
+                string targetPath = Path.Combine(targetParent.FullName, inputPath);
+                
+                using (var input = File.OpenText(targetPath))
+                {
+                    var deserializer = new YamlDotNet.Serialization.DeserializerBuilder()
+                                        .WithNamingConvention(CamelCaseNamingConvention.Instance)
+                                        .Build();
+
+                    List<Capterra> capterras = deserializer.Deserialize<List<Capterra>>(input);
+                    
+                    foreach (Capterra capterra in capterras) 
+                    {
+                        StringBuilder reportLog = new StringBuilder();
+                        reportLog.Append("Importing: ");
+                        reportLog.Append("Name: " + capterra.Name + ";");
+                        reportLog.Append("Categories: " + capterra.Tags + ";");
+                        reportLog.Append("Twitter: " + capterra.Twitter + ";");
+
+                        Console.WriteLine(reportLog.ToString());
+                    }   
+                }
             }
 
             if (args[1].ToLower() == "softwareadvice")

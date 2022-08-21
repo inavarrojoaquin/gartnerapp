@@ -2,11 +2,14 @@
 
 try
 {
-    string[] args1 = { "arg1" };
-    StartProgram startProgram = new StartProgram(args1);
+    StartProgram startProgram = new StartProgram(args);
     startProgram.Run();
+
+    // To Debug use these lines and comment the previous ones
+    //string[] testArgs = { "import", "capterra", "feed-products/capterra.yaml" };
+    //StartProgram startProgram = new StartProgram(testArgs);
 }
-catch (Exception)
+catch (Exception ex)
 {
-    throw;
+    Console.WriteLine(ex.Message);
 }
