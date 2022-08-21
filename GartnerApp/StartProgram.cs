@@ -1,10 +1,4 @@
-﻿using System.Reflection;
-using System.Text;
-using System.Xml;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
-
-public class StartProgram
+﻿public class StartProgram
 {
     private string[] args;
 
@@ -35,12 +29,12 @@ public class StartProgram
 
             if (args[1].ToLower() == "softwareadvice")
             {
-                Console.WriteLine("Source: ", args[2]);
+                SoftwareAdviceProduct softwareAdviceProduct = new SoftwareAdviceProduct();
+                softwareAdviceProduct.Run(args[2]);
             }
         }
 
         ShowMessageToFinishProgram();
-
     }
 
     static void ShowMessageToFinishProgram()

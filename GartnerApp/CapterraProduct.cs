@@ -19,9 +19,9 @@ public class CapterraProduct
                                 .WithNamingConvention(CamelCaseNamingConvention.Instance)
                                 .Build();
 
-            List<Capterra> capterras = deserializer.Deserialize<List<Capterra>>(input);
+            List<CapterraItem> capterras = deserializer.Deserialize<List<CapterraItem>>(input);
 
-            foreach (Capterra capterra in capterras)
+            foreach (CapterraItem capterra in capterras)
             {
                 StringBuilder reportLog = new StringBuilder();
                 reportLog.Append("Importing: ");
