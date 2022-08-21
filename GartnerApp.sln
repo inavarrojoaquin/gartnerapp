@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GartnerApp", "GartnerApp\GartnerApp.csproj", "{43E3FD96-0E5E-404E-A8DC-4B2810897213}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GartnerAppTest", "GartnerAppTest\GartnerAppTest.csproj", "{27DB4DDF-7096-4BB1-85DB-74B7AC19F252}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{43E3FD96-0E5E-404E-A8DC-4B2810897213}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43E3FD96-0E5E-404E-A8DC-4B2810897213}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43E3FD96-0E5E-404E-A8DC-4B2810897213}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27DB4DDF-7096-4BB1-85DB-74B7AC19F252}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27DB4DDF-7096-4BB1-85DB-74B7AC19F252}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27DB4DDF-7096-4BB1-85DB-74B7AC19F252}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27DB4DDF-7096-4BB1-85DB-74B7AC19F252}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
