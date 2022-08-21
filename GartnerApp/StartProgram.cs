@@ -29,32 +29,8 @@ public class StartProgram
         {
             if (args[1].ToLower() == "capterra")
             {
-                var currentDirectory = new DirectoryInfo(Directory.GetCurrentDirectory());
-
-                var targetParent = currentDirectory.Parent.Parent.Parent.Parent.Parent;
-
-                string inputPath = args[2];
-                string targetPath = Path.Combine(targetParent.FullName, inputPath);
-                
-                using (var input = File.OpenText(targetPath))
-                {
-                    var deserializer = new YamlDotNet.Serialization.DeserializerBuilder()
-                                        .WithNamingConvention(CamelCaseNamingConvention.Instance)
-                                        .Build();
-
-                    List<Capterra> capterras = deserializer.Deserialize<List<Capterra>>(input);
-                    
-                    foreach (Capterra capterra in capterras) 
-                    {
-                        StringBuilder reportLog = new StringBuilder();
-                        reportLog.Append("Importing: ");
-                        reportLog.Append("Name: " + capterra.Name + ";");
-                        reportLog.Append("Categories: " + capterra.Tags + ";");
-                        reportLog.Append("Twitter: " + capterra.Twitter + ";");
-
-                        Console.WriteLine(reportLog.ToString());
-                    }   
-                }
+                CapterraProduct capterraProduct = new CapterraProduct();
+                capterraProduct.Run(args[2]);
             }
 
             if (args[1].ToLower() == "softwareadvice")
