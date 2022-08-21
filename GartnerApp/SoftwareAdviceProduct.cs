@@ -1,12 +1,9 @@
-﻿using Newtonsoft.Json;
+﻿using GartnerApp;
+using Newtonsoft.Json;
 using System.Text;
 
-public class SoftwareAdviceProduct
+public class SoftwareAdviceProvider : IProvider
 {
-    public SoftwareAdviceProduct()
-    {
-    }
-
     public void Run(string inputPath)
     {
         string currentExePath = System.Reflection.Assembly.GetEntryAssembly().Location;

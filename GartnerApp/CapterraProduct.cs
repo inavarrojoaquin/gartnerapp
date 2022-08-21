@@ -1,12 +1,9 @@
-﻿using System.Text;
+﻿using GartnerApp;
+using System.Text;
 using YamlDotNet.Serialization.NamingConventions;
 
-public class CapterraProduct
+public class CapterraProvider : IProvider
 {
-    public CapterraProduct()
-    {
-    }
-
     public void Run(string inputPath)
     {
         string currentExePath = System.Reflection.Assembly.GetEntryAssembly().Location;

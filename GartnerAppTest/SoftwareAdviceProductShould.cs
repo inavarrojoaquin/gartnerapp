@@ -5,11 +5,9 @@ namespace GartnerAppTest
         [Test]
         public void GenerateImportLogAsExpected()
         {
-            SoftwareAdviceProduct softwareAdviceProduct = new SoftwareAdviceProduct();
-            string inputPath = "feed-products/softwareadvice.json";
+            SoftwareAdviceProvider softwareAdviceProduct = new SoftwareAdviceProvider();
             
-            Assert.DoesNotThrow(() => softwareAdviceProduct.Run(inputPath));
+            Assert.DoesNotThrow(() => softwareAdviceProduct.Run(TestConstants.SOFTWAREADVICE_FILE_PATH));
         }
-
     }
 }

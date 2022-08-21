@@ -1,4 +1,6 @@
-﻿public class StartProgram
+﻿using GartnerApp;
+
+public class StartProgram
 {
     private string[] args;
 
@@ -19,19 +21,12 @@
 
     public void Run()
     {
-        if (args[0].ToLower() == "import")
+        if (args[0].ToLower() == Constants.IMPORT)
         {
-            if (args[1].ToLower() == "capterra")
-            {
-                CapterraProduct capterraProduct = new CapterraProduct();
-                capterraProduct.Run(args[2]);
-            }
+            IProviderFactory providerFactory = new ProviderFactory();
+            IProvider targetProvider = providerFactory.Execute(args[1].ToLower());
 
-            if (args[1].ToLower() == "softwareadvice")
-            {
-                SoftwareAdviceProduct softwareAdviceProduct = new SoftwareAdviceProduct();
-                softwareAdviceProduct.Run(args[2]);
-            }
+            targetProvider.Run(args[2]);
         }
 
         ShowMessageToFinishProgram();

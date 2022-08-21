@@ -3,12 +3,6 @@ namespace GartnerAppTest
     public class StartProgramShould
     {
         private StartProgram startProgram;
-        
-        [SetUp]
-        public void Setup()
-        {
-            
-        }
 
         [Test]
         public void InitializedAsExpected()
