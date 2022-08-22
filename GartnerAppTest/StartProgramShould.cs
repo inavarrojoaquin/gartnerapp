@@ -9,7 +9,11 @@ namespace GartnerAppTest
         {
             string[] args = {"Arg1", "Arg2", "Arg3"};
 
-            Assert.DoesNotThrow(() => startProgram = new StartProgram(args));
+            startProgram = new StartProgram(args);
+
+            Assert.AreEqual(args[0].ToLower(), startProgram.Command);
+            Assert.AreEqual(args[1].ToLower(), startProgram.Provider);
+            Assert.AreEqual(args[2].ToLower(), startProgram.Path);
         }
 
         [Test]

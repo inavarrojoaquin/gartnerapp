@@ -2,7 +2,9 @@
 
 public class StartProgram
 {
-    private string[] args;
+    public string Command { get; }
+    public string Provider { get; }
+    public string Path { get; }
 
     public StartProgram(string[] args)
     {
@@ -16,17 +18,18 @@ public class StartProgram
             throw new ArgumentException(string.Format("Error: Arguments size must be 3. Current size: {0}",
                                                     args.Length));
         
-        this.args = args;
+        Command = args[0].ToLower();
+        Provider = args[1].ToLower();
+        Path = args[2].ToLower();
     }
 
     public void Run()
     {
-        if (args[0].ToLower() == Constants.IMPORT)
+        if (Command == Constants.IMPORT)
         {
             IProviderFactory providerFactory = new ProviderFactory();
-            IProvider targetProvider = providerFactory.Execute(args[1].ToLower());
-
-            targetProvider.Run(args[2]);
+            IProvider targetProvider = providerFactory.Execute(Provider);
+            targetProvider.Run(Path);
         }
 
         ShowMessageToFinishProgram();
