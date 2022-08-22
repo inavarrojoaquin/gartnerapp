@@ -1,5 +1,4 @@
 ﻿using GartnerApp;
-using System.Text;
 using YamlDotNet.Serialization.NamingConventions;
 
 public class CapterraProvider : IProvider
@@ -15,18 +14,14 @@ public class CapterraProvider : IProvider
                                 .WithNamingConvention(CamelCaseNamingConvention.Instance)
                                 .Build();
 
-            List<CapterraItem> capterras = deserializer.Deserialize<List<CapterraItem>>(input);
+            List<CapterraItemDTO> capterraList = deserializer.Deserialize<List<CapterraItemDTO>>(input);
 
-            foreach (CapterraItem capterra in capterras)
-            {
-                StringBuilder reportLog = new StringBuilder();
-                reportLog.Append("Importing: ");
-                reportLog.Append("Name: " + capterra.Name + ";");
-                reportLog.Append("Categories: " + capterra.Tags + ";");
-                reportLog.Append("Twitter: " + capterra.Twitter + ";");
+            Capterra customCapterra = new Capterra(capterraList);
 
-                Console.WriteLine(reportLog.ToString());
-            }
+            ReportManager report = new ReportManager();
+            string resultReport = report.BuildReport(customCapterra);
+
+            Console.WriteLine(resultReport);
         }
     }
 }

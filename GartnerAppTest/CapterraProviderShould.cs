@@ -1,6 +1,6 @@
 namespace GartnerAppTest
 {
-    public class CapterraProductShould
+    public class CapterraProviderShould
     {
         [Test]
         public void GenerateImportLogAsExpected()

@@ -1,6 +1,6 @@
 ﻿using YamlDotNet.Serialization;
 
-public class CapterraItem
+public class CapterraItemDTO
 {
     [YamlMember(Alias = "tags", ApplyNamingConventions = false)]
     public string Tags { get; set; }

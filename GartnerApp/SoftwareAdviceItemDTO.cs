@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-public class SoftwareAdviceItem
+public class SoftwareAdviceItemDTO
 {
     [JsonProperty("categories")]
     public List<string> Tags { get; set; }
