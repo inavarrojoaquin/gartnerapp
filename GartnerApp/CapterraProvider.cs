@@ -6,9 +6,8 @@ public class CapterraProvider : IProvider
 {
     public void Run(string inputPath)
     {
-        string currentExePath = System.Reflection.Assembly.GetEntryAssembly().Location;
-        string basePath = currentExePath.Split("GartnerApp")[0];
-        string targetPath = Path.Combine(basePath, inputPath);
+        PathManager pathManager = new PathManager();
+        string targetPath = pathManager.GetTargetPath(inputPath);
 
         using (var input = File.OpenText(targetPath))
         {

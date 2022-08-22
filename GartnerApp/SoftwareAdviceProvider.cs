@@ -6,11 +6,9 @@ public class SoftwareAdviceProvider : IProvider
 {
     public void Run(string inputPath)
     {
-        string currentExePath = System.Reflection.Assembly.GetEntryAssembly().Location;
-        string basePath = currentExePath.Split("GartnerApp")[0];
-        string targetPath = Path.Combine(basePath, inputPath);
+        PathManager pathManager = new PathManager();
+        string targetPath = pathManager.GetTargetPath(inputPath);
         string file = File.ReadAllText(targetPath);
-
         SoftwareAdvice softwareAdvice = JsonConvert.DeserializeObject<SoftwareAdvice>(file);
 
         foreach(SoftwareAdviceItem item in softwareAdvice.Products)
