@@ -1,10 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Infrastructure;
+
+using Infrastructure.Starts;
 
 try
 {
-    StartProgram startProgram = new StartProgram(args);
+    IStartProgram startProgram = new StartProgram(args);
     startProgram.Run();
 }
 catch (Exception ex)

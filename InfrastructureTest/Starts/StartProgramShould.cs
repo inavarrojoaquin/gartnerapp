@@ -1,13 +1,23 @@
-namespace Infrastructure
+using Infrastructure.Starts;
+
+namespace InfrastructureTest.Starts
 {
     public class StartProgramShould
     {
         private StartProgram startProgram;
 
+        public void RunAll()
+        {
+            InitializedAsExpected();
+            RaiseExWhenArgsAreNull();
+            RaiseExWhenArgsAreEmpty();
+            RaiseExWhenArgsIsDefferentFrom3();
+        }
+
         [Test]
         public void InitializedAsExpected()
         {
-            string[] args = {"Arg1", "Arg2", "Arg3"};
+            string[] args = { "Arg1", "Arg2", "Arg3" };
 
             startProgram = new StartProgram(args);
 
@@ -21,7 +31,7 @@ namespace Infrastructure
         {
             Assert.Throws<ArgumentNullException>(() => startProgram = new StartProgram(null));
         }
-        
+
         [Test]
         public void RaiseExWhenArgsAreEmpty()
         {
@@ -33,7 +43,7 @@ namespace Infrastructure
         [Test]
         public void RaiseExWhenArgsIsDefferentFrom3()
         {
-            string[] args = {"Arg1"};
+            string[] args = { "Arg1" };
             var ex = Assert.Throws<ArgumentException>(() => startProgram = new StartProgram(args));
 
             Assert.IsTrue(ex.Message.Contains(string.Format("Error: Arguments size must be 3. Current size: {0}",

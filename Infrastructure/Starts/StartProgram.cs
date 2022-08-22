@@ -2,9 +2,9 @@
 using Infrastructure.Factories;
 using Infrastructure.Providers;
 
-namespace Infrastructure
+namespace Infrastructure.Starts
 {
-    public class StartProgram
+    public class StartProgram : IStartProgram
     {
         public string Command { get; }
         public string Provider { get; }
