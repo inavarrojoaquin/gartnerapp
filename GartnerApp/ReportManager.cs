@@ -11,17 +11,26 @@ namespace GartnerApp
             foreach (var item in customProvider.Products)
             {
                 report.Append("Importing: ");
-                report.Append("Name: " + item.Name + ";");
-                report.Append("Categories: ");
-                foreach (string tag in item.Tags)
-                {
-                    string log = tag + ", ";
-                    if (tag == item.Tags.Last())
-                        log = tag + "; ";
+                
+                if (!string.IsNullOrEmpty(item.Name))
+                    report.Append("Name: " + item.Name + ";");
 
-                    report.Append(log);
+                if (item.Tags.Any())
+                {
+                    report.Append("Categories: ");
+                    foreach (string tag in item.Tags)
+                    {
+                        string log = tag + ", ";
+                        if (tag == item.Tags.Last())
+                            log = tag + "; ";
+
+                        report.Append(log);
+                    }
                 }
-                report.Append("Twitter: " + item.Twitter + "; ");
+                
+                if (!string.IsNullOrEmpty(item.Twitter))
+                    report.Append("Twitter: " + item.Twitter + "; ");
+                
                 report.AppendLine();
             }
 
