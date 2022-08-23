@@ -15,3 +15,7 @@ From here run the program like:
 ## To run all unit tets from comman line
 eg. 
 C:\..\GartnerAppTest\bin\Debug\net6.0>dotnet test GartnerAppTest.dll
+
+More time
+Add internal log for errors
+Complete DB functionalities
