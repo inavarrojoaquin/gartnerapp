@@ -9,11 +9,13 @@ namespace Infrastructure.Starts
 {
     public class StartProgram : IStartProgram
     {
-        public string Command { get; }
-        public string Provider { get; }
-        public string Path { get; }
+        private string[] arguments;
+        private IProviderFactory providerFactory;
+        private readonly IDatabaseFactorySectionHandler databaseFactorySectionHandler;
 
-        public StartProgram(string[] args, IConfiguration config)
+        public StartProgram(string[] args,
+                            IProviderFactory providerFactory,
+                            IDatabaseFactorySectionHandler databaseFactorySectionHandler)
         {
             if (args == null)
                 throw new ArgumentNullException("Arguments");
@@ -21,27 +23,27 @@ namespace Infrastructure.Starts
             if (args.Length == 0)
                 throw new ArgumentException("Error: Arguments are empty");
 
-            if (args.Length != 3)
-                throw new ArgumentException(string.Format("Error: Arguments size must be 3. Current size: {0}",
-                                                        args.Length));
-
-            Command = args[0].ToLower();
-            Provider = args[1].ToLower();
-            Path = args[2].ToLower();
-            
-            DatabaseFactorySectionHandler.Create(config);
+            arguments = args;
+            this.providerFactory = providerFactory;
+            this.databaseFactorySectionHandler = databaseFactorySectionHandler;
         }
 
         public void Run()
         {
-            if (Command == Constants.IMPORT)
+            string command = arguments[0].ToLower();
+            if (command == Constants.IMPORT)
             {
-                IProviderFactory providerFactory = new ProviderFactory();
-                IProvider targetProvider = providerFactory.Execute(Provider);
-                targetProvider.Run(Path);
+                if (arguments.Length != 3)
+                    throw new ArgumentException(string.Format("Error: Arguments size must be 3. Current size: {0}", arguments.Length));
+
+                string provider = arguments[1].ToLower();
+                string path = arguments[2].ToLower();
+                
+                IProvider targetProvider = providerFactory.Execute(provider);
+                targetProvider.Run(path);
             }
 
-            if (Command == Constants.GETUSERS)
+            if (command == Constants.GETUSERS)
             {
                 UsersManager.GetUsers();
             }

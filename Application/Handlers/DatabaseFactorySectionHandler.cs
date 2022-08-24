@@ -3,19 +3,16 @@ using Microsoft.Extensions.Configuration;
 
 namespace Application.Handlers
 {
-    public sealed class DatabaseFactorySectionHandler
+    public class DatabaseFactorySectionHandler : IDatabaseFactorySectionHandler
     {
         private static ConnectionSettings connectionSettings;
 
-        public static void Create(IConfiguration config)
+        public DatabaseFactorySectionHandler(IConfiguration config)
         {
-            if (config == null)
-                return;
-
             connectionSettings = config.GetRequiredSection("ConnectionSettings")
                 .Get<ConnectionSettings>();
         }
-
+        
         public static string Name
         {
             get { return connectionSettings.DatabaseFactoryConfiguration.Name; }
