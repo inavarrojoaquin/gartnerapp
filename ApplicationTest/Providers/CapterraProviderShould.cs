@@ -1,4 +1,6 @@
-namespace Infrastructure.Providers
+using Application.Providers;
+
+namespace ApplicationTest.Providers
 {
     public class CapterraProviderShould
     {

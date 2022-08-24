@@ -1,7 +1,7 @@
 ﻿using Domain.Database;
 using Microsoft.Extensions.Configuration;
 
-namespace Application.Handlers
+namespace Infrastructure.Handlers
 {
     public class DatabaseFactorySectionHandler : IDatabaseFactorySectionHandler
     {

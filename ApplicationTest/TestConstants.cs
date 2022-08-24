@@ -1,4 +1,4 @@
-﻿namespace Infrastructure
+﻿namespace ApplicationTest
 {
     public static class TestConstants
     {

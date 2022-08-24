@@ -3,7 +3,7 @@ using Domain.DTOs;
 using Domain.Providers;
 using YamlDotNet.Serialization.NamingConventions;
 
-namespace Infrastructure.Providers
+namespace Application.Providers
 {
     public class CapterraProvider : IProvider
     {

@@ -1,8 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Application.Handlers;
-using Infrastructure.Factories;
-using Infrastructure.Starts;
+using Application;
+using Application.Providers;
 using Microsoft.Extensions.Configuration;
 
 try
@@ -14,10 +13,9 @@ try
         .Build();
 
     IProviderFactory providerFactory = new ProviderFactory();
-    IDatabaseFactorySectionHandler databaseFactorySectionHandler = new DatabaseFactorySectionHandler(config);
-    IStartProgram startProgram = new StartProgram(args,
-                                                  providerFactory,
-                                                  databaseFactorySectionHandler);
+    //IDatabaseFactorySectionHandler databaseFactorySectionHandler = new DatabaseFactorySectionHandler(config);
+    StartProgram startProgram = new StartProgram(args,
+                                                  providerFactory);
     
     startProgram.Run();
 }

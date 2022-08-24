@@ -1,22 +1,20 @@
-using Application.Handlers;
-using Infrastructure.Factories;
-using Infrastructure.Providers;
-using Infrastructure.Starts;
+using Application;
+using Application.Providers;
 using NSubstitute;
 
-namespace InfrastructureTest.Starts
+namespace ApplicationTest
 {
     public class StartProgramShould
     {
         private StartProgram startProgram;
         private IProviderFactory providerFactory;
-        private IDatabaseFactorySectionHandler databaseFactorySectionHandler;
+        //private IDatabaseFactorySectionHandler databaseFactorySectionHandler;
 
         [SetUp]
         public void SetUp()
         {
             providerFactory = Substitute.For<IProviderFactory>();
-            databaseFactorySectionHandler = Substitute.For<IDatabaseFactorySectionHandler>();
+            //databaseFactorySectionHandler = Substitute.For<IDatabaseFactorySectionHandler>();
         }
 
         [Test]
@@ -27,20 +25,19 @@ namespace InfrastructureTest.Starts
             providerFactory.Execute(Arg.Any<string>()).Returns(new CapterraProvider());
 
             startProgram = new StartProgram(args,
-                                            providerFactory,
-                                            databaseFactorySectionHandler);
+                                            providerFactory);
         }
 
         [Test]
         public void RaiseExWhenArgsAreNull()
         {
-            Assert.Throws<ArgumentNullException>(() => startProgram = new StartProgram(null, null, null));
+            Assert.Throws<ArgumentNullException>(() => startProgram = new StartProgram(null, null));
         }
 
         [Test]
         public void RaiseExWhenArgsAreEmpty()
         {
-            var ex = Assert.Throws<ArgumentException>(() => startProgram = new StartProgram(new string[0], null, null));
+            var ex = Assert.Throws<ArgumentException>(() => startProgram = new StartProgram(new string[0], null));
 
             Assert.IsTrue(ex.Message.Contains("Error: Arguments are empty"));
         }
@@ -50,7 +47,7 @@ namespace InfrastructureTest.Starts
         {
             string[] args = { "Import" };
             
-            startProgram = new StartProgram(args, null,  null);
+            startProgram = new StartProgram(args, null);
 
             var ex = Assert.Throws<ArgumentException>(() => startProgram.Run());
 

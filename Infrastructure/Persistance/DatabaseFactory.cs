@@ -1,8 +1,8 @@
 ﻿using Application.Database;
-using Application.Handlers;
+using Infrastructure.Handlers;
 using System.Reflection;
 
-namespace Infrastructure.Factories
+namespace Infrastructure.Persistance
 {
     public sealed class DatabaseFactory
     {

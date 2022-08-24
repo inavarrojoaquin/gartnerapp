@@ -3,7 +3,7 @@ using Domain.DTOs;
 using Domain.Providers;
 using Newtonsoft.Json;
 
-namespace Infrastructure.Providers
+namespace Application.Providers
 {
     public class SoftwareAdviceProvider : IProvider
     {

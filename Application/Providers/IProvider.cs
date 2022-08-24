@@ -1,4 +1,4 @@
-﻿namespace Infrastructure.Providers
+﻿namespace Application.Providers
 {
     public interface IProvider
     {

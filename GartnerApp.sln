@@ -9,23 +9,23 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GartnerAppTest", "GartnerAp
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-Domain", "0-Domain", "{E2376A2F-5810-4592-920F-9502B471EF90}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Application", "1-Application", "{613B1AFC-8A8C-4F34-A28E-F9E3A81A106F}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Application", "2-Application", "{613B1AFC-8A8C-4F34-A28E-F9E3A81A106F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2-Infrastructure", "2-Infrastructure", "{79F310D5-9C97-40C4-8C8D-386BCAE4003E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-Infrastructure", "1-Infrastructure", "{79F310D5-9C97-40C4-8C8D-386BCAE4003E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3-Presentation", "3-Presentation", "{412C8A31-0E12-4D74-92DD-993A34577B02}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{34EE4B1C-24D5-4F70-8300-E359296A47C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{34EE4B1C-24D5-4F70-8300-E359296A47C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DomainTest", "DomainTest\DomainTest.csproj", "{9EAA8CA8-58AA-4011-A906-08A3A9A9686D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DomainTest", "DomainTest\DomainTest.csproj", "{9EAA8CA8-58AA-4011-A906-08A3A9A9686D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{C1DD0723-4C06-41E0-83CD-30EAD7AAD0BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{C1DD0723-4C06-41E0-83CD-30EAD7AAD0BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationTest", "ApplicationTest\ApplicationTest.csproj", "{10BCA8ED-9037-4A04-BFAF-18D76B1D806D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTest", "ApplicationTest\ApplicationTest.csproj", "{10BCA8ED-9037-4A04-BFAF-18D76B1D806D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{FDF3B47B-5F06-4F88-9625-831D9EAAF3D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{FDF3B47B-5F06-4F88-9625-831D9EAAF3D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfrastructureTest", "InfrastructureTest\InfrastructureTest.csproj", "{F7A807D7-2707-4624-A33E-91B86019E6B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfrastructureTest", "InfrastructureTest\InfrastructureTest.csproj", "{F7A807D7-2707-4624-A33E-91B86019E6B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

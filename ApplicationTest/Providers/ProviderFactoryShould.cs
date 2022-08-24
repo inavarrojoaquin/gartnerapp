@@ -1,6 +1,6 @@
-﻿using Infrastructure.Providers;
+﻿using Application.Providers;
 
-namespace Infrastructure.Factories
+namespace ApplicationTest.Providers
 {
     public class ProviderFactoryShould
     {

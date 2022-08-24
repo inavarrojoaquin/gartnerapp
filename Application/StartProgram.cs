@@ -1,21 +1,16 @@
-﻿using Application.Handlers;
+﻿using Application.Providers;
 using Domain.Common;
-using Infrastructure.Factories;
-using Infrastructure.Managers;
-using Infrastructure.Providers;
-using Microsoft.Extensions.Configuration;
 
-namespace Infrastructure.Starts
+namespace Application
 {
-    public class StartProgram : IStartProgram
+    public class StartProgram
     {
         private string[] arguments;
         private IProviderFactory providerFactory;
-        private readonly IDatabaseFactorySectionHandler databaseFactorySectionHandler;
+        //private readonly IDatabaseFactorySectionHandler databaseFactorySectionHandler;
 
         public StartProgram(string[] args,
-                            IProviderFactory providerFactory,
-                            IDatabaseFactorySectionHandler databaseFactorySectionHandler)
+                            IProviderFactory providerFactory)
         {
             if (args == null)
                 throw new ArgumentNullException("Arguments");
@@ -25,7 +20,7 @@ namespace Infrastructure.Starts
 
             arguments = args;
             this.providerFactory = providerFactory;
-            this.databaseFactorySectionHandler = databaseFactorySectionHandler;
+            //this.databaseFactorySectionHandler = databaseFactorySectionHandler;
         }
 
         public void Run()
@@ -38,14 +33,15 @@ namespace Infrastructure.Starts
 
                 string provider = arguments[1].ToLower();
                 string path = arguments[2].ToLower();
-                
+
                 IProvider targetProvider = providerFactory.Execute(provider);
                 targetProvider.Run(path);
             }
 
             if (command == Constants.GETUSERS)
             {
-                UsersManager.GetUsers();
+                //GetUsersUseCase
+                //UsersManager.GetUsers();
             }
 
             ShowMessageToFinishProgram();

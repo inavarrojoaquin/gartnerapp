@@ -1,6 +1,4 @@
-﻿using Infrastructure.Providers;
-
-namespace Infrastructure.Factories
+﻿namespace Application.Providers
 {
     public interface IProviderFactory
     {

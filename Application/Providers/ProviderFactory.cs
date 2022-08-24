@@ -1,7 +1,6 @@
 ﻿using Domain.Common;
-using Infrastructure.Providers;
 
-namespace Infrastructure.Factories
+namespace Application.Providers
 {
     public class ProviderFactory : IProviderFactory
     {
