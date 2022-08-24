@@ -1,4 +1,7 @@
+using Domain.Database;
 using Infrastructure.Starts;
+using Microsoft.Extensions.Configuration;
+using NSubstitute;
 
 namespace InfrastructureTest.Starts
 {
@@ -6,20 +9,12 @@ namespace InfrastructureTest.Starts
     {
         private StartProgram startProgram;
 
-        public void RunAll()
-        {
-            InitializedAsExpected();
-            RaiseExWhenArgsAreNull();
-            RaiseExWhenArgsAreEmpty();
-            RaiseExWhenArgsIsDefferentFrom3();
-        }
-
         [Test]
         public void InitializedAsExpected()
         {
             string[] args = { "Arg1", "Arg2", "Arg3" };
 
-            startProgram = new StartProgram(args);
+            startProgram = new StartProgram(args, null);
 
             Assert.AreEqual(args[0].ToLower(), startProgram.Command);
             Assert.AreEqual(args[1].ToLower(), startProgram.Provider);
@@ -29,13 +24,13 @@ namespace InfrastructureTest.Starts
         [Test]
         public void RaiseExWhenArgsAreNull()
         {
-            Assert.Throws<ArgumentNullException>(() => startProgram = new StartProgram(null));
+            Assert.Throws<ArgumentNullException>(() => startProgram = new StartProgram(null, null));
         }
 
         [Test]
         public void RaiseExWhenArgsAreEmpty()
         {
-            var ex = Assert.Throws<ArgumentException>(() => startProgram = new StartProgram(new string[0]));
+            var ex = Assert.Throws<ArgumentException>(() => startProgram = new StartProgram(new string[0], null));
 
             Assert.IsTrue(ex.Message.Contains("Error: Arguments are empty"));
         }
@@ -44,7 +39,7 @@ namespace InfrastructureTest.Starts
         public void RaiseExWhenArgsIsDefferentFrom3()
         {
             string[] args = { "Arg1" };
-            var ex = Assert.Throws<ArgumentException>(() => startProgram = new StartProgram(args));
+            var ex = Assert.Throws<ArgumentException>(() => startProgram = new StartProgram(args, null));
 
             Assert.IsTrue(ex.Message.Contains(string.Format("Error: Arguments size must be 3. Current size: {0}",
                                                     args.Length)));

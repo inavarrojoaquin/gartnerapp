@@ -1,6 +1,9 @@
-﻿using Domain.Common;
+﻿using Application.Handlers;
+using Domain.Common;
 using Infrastructure.Factories;
+using Infrastructure.Managers;
 using Infrastructure.Providers;
+using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure.Starts
 {
@@ -10,7 +13,7 @@ namespace Infrastructure.Starts
         public string Provider { get; }
         public string Path { get; }
 
-        public StartProgram(string[] args)
+        public StartProgram(string[] args, IConfiguration config)
         {
             if (args == null)
                 throw new ArgumentNullException("Arguments");
@@ -25,6 +28,8 @@ namespace Infrastructure.Starts
             Command = args[0].ToLower();
             Provider = args[1].ToLower();
             Path = args[2].ToLower();
+            
+            DatabaseFactorySectionHandler.Create(config);
         }
 
         public void Run()
@@ -34,6 +39,11 @@ namespace Infrastructure.Starts
                 IProviderFactory providerFactory = new ProviderFactory();
                 IProvider targetProvider = providerFactory.Execute(Provider);
                 targetProvider.Run(Path);
+            }
+
+            if (Command == Constants.GETUSERS)
+            {
+                UsersManager.GetUsers();
             }
 
             ShowMessageToFinishProgram();
