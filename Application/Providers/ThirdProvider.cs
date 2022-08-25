@@ -1,10 +1,12 @@
-﻿namespace Application.Providers
+﻿using Domain.ProviderItems;
+
+namespace Application.Providers
 {
     public class ThirdProvider : IProvider
     {
-        public void Run(string inputPath)
+        public ICollection<IProduct> GetItems()
         {
-            throw new NotImplementedException();
+            return new List<IProduct>();
         }
     }
 }

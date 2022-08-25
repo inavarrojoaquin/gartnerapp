@@ -9,15 +9,15 @@ namespace DomainTest.Provider
         public void GenerateAsExpected()
         {
 
-            List<CapterraItemDTO> capterraList = new List<CapterraItemDTO>
+            List<CapterraProductDTO> capterraList = new List<CapterraProductDTO>
             {
-                new CapterraItemDTO
+                new CapterraProductDTO
                 {
                     Name = "Name1",
                     Tags = "Tag1",
                     Twitter = "Twitter1"
                 },
-                new CapterraItemDTO
+                new CapterraProductDTO
                 {
                     Name = "Name2",
                     Tags = "Tag2",

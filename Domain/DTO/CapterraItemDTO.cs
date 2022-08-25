@@ -2,7 +2,7 @@
 
 namespace Domain.DTOs
 {
-    public class CapterraItemDTO
+    public class CapterraProductDTO
     {
         [YamlMember(Alias = "tags", ApplyNamingConventions = false)]
         public string Tags { get; set; }

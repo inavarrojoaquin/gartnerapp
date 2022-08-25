@@ -1,7 +1,9 @@
-﻿namespace Application.Providers
+﻿using Application.Generators;
+
+namespace Application.Providers
 {
     public interface IProviderFactory
     {
-        IProvider Execute(string targetProvider);
+        IProvider ProductParse(string provider, string path, IPathGenerator pathGenerator);
     }
 }

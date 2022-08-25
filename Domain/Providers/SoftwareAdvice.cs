@@ -3,12 +3,12 @@ using Domain.ProviderItems;
 
 namespace Domain.Providers
 {
-    public class SoftwareAdvice : ICustomProvider
+    public class SoftwareAdvice : IProviderProduct
     {
-        public List<ICustomItem> Products { get; }
+        public ICollection<IProduct> Products { get; }
         public SoftwareAdvice(SoftwareAdviceDTO softwareAdviceDTO)
         {
-            Products = new List<ICustomItem>();
+            Products = new List<IProduct>();
 
             foreach (var item in softwareAdviceDTO.Products)
             {

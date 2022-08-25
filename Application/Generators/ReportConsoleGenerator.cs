@@ -1,18 +1,21 @@
-﻿using Domain.Providers;
+﻿using Domain.ProviderItems;
 using System.Text;
 
-namespace Application.Managers
+namespace Application.Generators
 {
-    public class ReportManager
+    public class ReportConsoleGenerator : IReportConsoleGenerator
     {
-        public string BuildReport(ICustomProvider customProvider)
+        public string Generate(ICollection<IProduct> items)
         {
+            if(items == null || !items.Any())
+                return string.Empty;
+
             StringBuilder report = new StringBuilder();
 
-            foreach (var item in customProvider.Products)
+            foreach (var item in items)
             {
                 report.Append("Importing: ");
-                
+
                 if (!string.IsNullOrEmpty(item.Name))
                     report.Append("Name: " + item.Name + ";");
 
@@ -28,10 +31,10 @@ namespace Application.Managers
                         report.Append(log);
                     }
                 }
-                
+
                 if (!string.IsNullOrEmpty(item.Twitter))
                     report.Append("Twitter: " + item.Twitter + "; ");
-                
+
                 report.AppendLine();
             }
 

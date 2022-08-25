@@ -1,5 +1,6 @@
-﻿using Application.Managers;
+﻿using Application.Generators;
 using Domain.DTOs;
+using Domain.ProviderItems;
 using Domain.Providers;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -7,10 +8,20 @@ namespace Application.Providers
 {
     public class CapterraProvider : IProvider
     {
-        public void Run(string inputPath)
+        private readonly string inputPath;
+        private readonly IPathGenerator pathGenerator;
+
+        public CapterraProvider(string inputPath,
+                                IPathGenerator pathGenerator)
         {
-            PathManager pathManager = new PathManager();
-            string targetPath = pathManager.GetTargetPath(inputPath);
+            this.inputPath = inputPath;
+            this.pathGenerator = pathGenerator;
+        }
+
+        public ICollection<IProduct> GetItems()
+        {
+            ICollection<IProduct> products = new List<IProduct>();
+            string targetPath = pathGenerator.Generate(inputPath);
 
             using (var input = File.OpenText(targetPath))
             {
@@ -18,15 +29,12 @@ namespace Application.Providers
                                     .WithNamingConvention(CamelCaseNamingConvention.Instance)
                                     .Build();
 
-                List<CapterraItemDTO> capterraList = deserializer.Deserialize<List<CapterraItemDTO>>(input);
-
-                Capterra customCapterra = new Capterra(capterraList);
-
-                ReportManager report = new ReportManager();
-                string resultReport = report.BuildReport(customCapterra);
-
-                Console.WriteLine(resultReport);
+                var items = deserializer.Deserialize<ICollection<CapterraProductDTO>>(input);
+                
+                products = new Capterra(items).Products;
             }
+
+            return products;
         }
     }
 }

@@ -1,56 +1,51 @@
-﻿using Application.Providers;
+﻿using Application.Generators;
+using Application.Parsers;
+using Application.Providers;
+using Application.Repositories;
 using Domain.Common;
+using Domain.DTO;
+using Domain.ProviderItems;
 
 namespace Application
 {
     public class StartProgram
     {
-        private string[] arguments;
-        private IProviderFactory providerFactory;
-        //private readonly IDatabaseFactorySectionHandler databaseFactorySectionHandler;
+        private readonly IInputParser inputParser;
+        private readonly IProviderFactory providerFactory;
+        private readonly IReportConsoleGenerator reportConsoleGenerator;
+        private readonly IRepository repository;
 
-        public StartProgram(string[] args,
-                            IProviderFactory providerFactory)
+        public StartProgram(IInputParser inputParser,
+                            IProviderFactory providerFactory,
+                            IReportConsoleGenerator reportConsoleGenerator,
+                            IRepository repository)
         {
-            if (args == null)
-                throw new ArgumentNullException("Arguments");
-
-            if (args.Length == 0)
-                throw new ArgumentException("Error: Arguments are empty");
-
-            arguments = args;
+            this.inputParser = inputParser;
             this.providerFactory = providerFactory;
-            //this.databaseFactorySectionHandler = databaseFactorySectionHandler;
+            this.reportConsoleGenerator = reportConsoleGenerator;
+            this.repository = repository;
         }
 
         public void Run()
         {
-            string command = arguments[0].ToLower();
-            if (command == Constants.IMPORT)
-            {
-                if (arguments.Length != 3)
-                    throw new ArgumentException(string.Format("Error: Arguments size must be 3. Current size: {0}", arguments.Length));
+            ConsoleInputDTO consoleInputDTO = inputParser.Parse();
 
-                string provider = arguments[1].ToLower();
-                string path = arguments[2].ToLower();
+            IPathGenerator pathGenerator = new PathGenerator();
+            IProvider targetProvider = providerFactory.ProductParse(
+                consoleInputDTO.Provider,
+                consoleInputDTO.Path,
+                pathGenerator);
+            IProviderImporter providerImporter = new ProviderImporter(
+                targetProvider,
+                reportConsoleGenerator,
+                repository);
+            ICollection<IProduct> items = providerImporter.GetItems();
+            
+            string generatedReport = providerImporter.Generate(items);
+            Console.Write(generatedReport);
 
-                IProvider targetProvider = providerFactory.Execute(provider);
-                targetProvider.Run(path);
-            }
-
-            if (command == Constants.GETUSERS)
-            {
-                //GetUsersUseCase
-                //UsersManager.GetUsers();
-            }
-
-            ShowMessageToFinishProgram();
-        }
-
-        static void ShowMessageToFinishProgram()
-        {
-            Console.WriteLine("Press any key to finish...");
-            Console.ReadKey();
+            // si no hay productos, no hacer nada
+            //providerImporter.Insert(items);
         }
     }
 }

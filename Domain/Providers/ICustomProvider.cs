@@ -2,8 +2,8 @@
 
 namespace Domain.Providers
 {
-    public interface ICustomProvider
+    public interface IProviderProduct
     {
-        List<ICustomItem> Products { get; }
+        ICollection<IProduct> Products { get; }
     }
 }

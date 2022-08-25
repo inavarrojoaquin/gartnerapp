@@ -3,17 +3,17 @@ using Domain.ProviderItems;
 
 namespace Domain.Providers
 {
-    public class Capterra : ICustomProvider
+    public class Capterra : IProviderProduct
     {
-        public List<ICustomItem> Products { get; }
+        public ICollection<IProduct> Products { get; }
 
-        public Capterra(List<CapterraItemDTO> capterraList)
+        public Capterra(ICollection<CapterraProductDTO> products)
         {
-            Products = new List<ICustomItem>();
+            Products = new List<IProduct>();
 
-            foreach (var item in capterraList)
+            foreach (var item in products)
             {
-                CustomCapterraItem customItem = new CustomCapterraItem();
+                CapterraProduct customItem = new CapterraProduct();
                 customItem.Name = item.Name;
                 customItem.Tags.Add(item.Tags);
                 customItem.Twitter = item.Twitter;

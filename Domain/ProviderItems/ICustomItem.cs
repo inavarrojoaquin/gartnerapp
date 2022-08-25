@@ -1,9 +1,9 @@
 ﻿namespace Domain.ProviderItems
 {
-    public interface ICustomItem
+    public interface IProduct
     {
-        string Name { get; }
-        List<string> Tags { get; }
-        string Twitter { get; }
+        string Name { get; set; }
+        List<string> Tags { get; set; }
+        string Twitter { get; set; }
     }
 }

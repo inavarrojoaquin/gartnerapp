@@ -1,7 +1,9 @@
-﻿namespace Application.Providers
+﻿using Domain.ProviderItems;
+
+namespace Application.Providers
 {
     public interface IProvider
     {
-        void Run(string inputPath);
+        ICollection<IProduct> GetItems();
     }
 }

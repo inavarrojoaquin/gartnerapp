@@ -1,5 +1,10 @@
 using Application;
+using Application.Generators;
+using Application.Parsers;
 using Application.Providers;
+using Application.Repositories;
+using Domain.DTO;
+using Domain.ProviderItems;
 using NSubstitute;
 
 namespace ApplicationTest
@@ -7,52 +12,71 @@ namespace ApplicationTest
     public class StartProgramShould
     {
         private StartProgram startProgram;
-        private IProviderFactory providerFactory;
+        //private IProviderFactory providerFactory;
         //private IDatabaseFactorySectionHandler databaseFactorySectionHandler;
 
         [SetUp]
         public void SetUp()
         {
-            providerFactory = Substitute.For<IProviderFactory>();
             //databaseFactorySectionHandler = Substitute.For<IDatabaseFactorySectionHandler>();
         }
 
         [Test]
-        public void InitializedAsExpected()
+        public void RunAsExpected()
         {
-            string[] args = { "Arg1", "Arg2", "Arg3" };
+            const string argProvider = "Provider";
+            const string argPath = "path";
 
-            providerFactory.Execute(Arg.Any<string>()).Returns(new CapterraProvider());
-
-            startProgram = new StartProgram(args,
-                                            providerFactory);
-        }
-
-        [Test]
-        public void RaiseExWhenArgsAreNull()
-        {
-            Assert.Throws<ArgumentNullException>(() => startProgram = new StartProgram(null, null));
-        }
-
-        [Test]
-        public void RaiseExWhenArgsAreEmpty()
-        {
-            var ex = Assert.Throws<ArgumentException>(() => startProgram = new StartProgram(new string[0], null));
-
-            Assert.IsTrue(ex.Message.Contains("Error: Arguments are empty"));
-        }
-
-        [Test]
-        public void RaiseExWhenCommandImportAndArgsAreDefferentFrom3()
-        {
-            string[] args = { "Import" };
+            IInputParser inputParser = Substitute.For<IInputParser>();
+            inputParser.Parse()
+                       .Returns(new ConsoleInputDTO
+                       {
+                           Provider = argProvider,
+                           Path = argPath
+                       });
             
-            startProgram = new StartProgram(args, null);
+            IProviderFactory providerFactory = Substitute.For<IProviderFactory>();
+            IProvider provider = Substitute.For<IProvider>();
+            
+            ICollection<IProduct> items = new List<IProduct>();
+            items.Add(new CapterraProduct());
+            items.Add(new CapterraProduct());
 
-            var ex = Assert.Throws<ArgumentException>(() => startProgram.Run());
+            provider.GetItems().Returns(items);
+            providerFactory.ProductParse(argProvider,
+                                         argPath,
+                                         Arg.Any<IPathGenerator>())
+                           .Returns(provider);
 
-            Assert.IsTrue(ex.Message.Contains(string.Format("Error: Arguments size must be 3. Current size: {0}",
-                                                    args.Length)));
+            IReportConsoleGenerator reportConsoleGenerator = Substitute.For<IReportConsoleGenerator>();
+            
+            int generatorCounter = 0;
+            reportConsoleGenerator
+                .When(x => x.Generate(Arg.Is(items)))
+                .Do(y => generatorCounter++);
+            
+            IRepository repository = Substitute.For<IRepository>();
+
+            int repositoryCounter = 0;
+            repository.When(x => x.Insert(Arg.Any<IProduct>()))
+                      .Do(y => repositoryCounter++);
+
+            startProgram = new StartProgram(inputParser,
+                                            providerFactory,
+                                            reportConsoleGenerator,
+                                            repository);
+            startProgram.Run();
+
+            inputParser.Received(1).Parse();
+            providerFactory.Received(1).ProductParse(argProvider,
+                                                     argPath,
+                                                     Arg.Any<IPathGenerator>());
+            reportConsoleGenerator.Received(1).Generate(Arg.Is(items));
+            repository.Received(2).Insert(Arg.Any<IProduct>());
+
+            Assert.That(generatorCounter, Is.EqualTo(1));
+            Assert.That(repositoryCounter, Is.EqualTo(2));
         }
+
     }
 }

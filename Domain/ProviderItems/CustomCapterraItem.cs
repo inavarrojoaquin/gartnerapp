@@ -1,9 +1,9 @@
 ﻿namespace Domain.ProviderItems
 {
-    public class CustomCapterraItem : ICustomItem
+    public class CapterraProduct : IProduct
     {
-        public string Name { get; internal set; }
-        public List<string> Tags { get; internal set; } = new List<string>();
-        public string Twitter { get; internal set; }
+        public string Name { get; set; }
+        public List<string> Tags { get; set; } = new List<string>();
+        public string Twitter { get; set; }
     }
 }
