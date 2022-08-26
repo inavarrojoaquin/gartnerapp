@@ -1,16 +1,23 @@
-﻿using Infrastructure.Workers;
+﻿using Domain.ProviderItems;
+using Infrastructure.Persistance;
 using System.Data;
 
-namespace Infrastructure.Managers
+namespace Infrastructure.Repositories
 {
-    class UsersManager : DatabaseWorker
+    public class ProductRepository : IProductRepository
     {
-        public static void GetUsers()
+        private Database database;
+        public ProductRepository(Database database)
+        {
+            this.database = database;
+        }
+        public void Insert(IProduct item)
         {
             using (IDbConnection connection = database.CreateOpenConnection())
             {
-                using (IDbCommand command = database.CreateCommand("SELECT * FROM users", connection))
+                using (IDbCommand command = connection.CreateCommand())
                 {
+                    command.CommandText = "SELECT * FROM users";
                     using (IDataReader reader = command.ExecuteReader())
                     {
                         Console.WriteLine("List of users from database:");

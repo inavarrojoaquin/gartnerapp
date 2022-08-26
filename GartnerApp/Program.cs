@@ -4,7 +4,9 @@ using Application;
 using Application.Generators;
 using Application.Parsers;
 using Application.Providers;
-using Application.Repositories;
+using Infrastructure.Handlers;
+using Infrastructure.Persistance;
+using Infrastructure.Repositories;
 using Microsoft.Extensions.Configuration;
 
 try
@@ -14,10 +16,14 @@ try
         .AddEnvironmentVariables()
         .Build();
 
+    IDatabaseSettingsHandler databaseFactorySectionHandler = new DatabaseSettingsHandler(config);
+
+    Database database = new Database(databaseFactorySectionHandler);
+    
     IInputParser inputParser = new InputParser(args);
     IProviderFactory providerFactory = new ProviderFactory();
     IReportConsoleGenerator reportConsoleGenerator = new ReportConsoleGenerator();
-    IRepository repository = new Repository();
+    IProductRepository repository = new ProductRepository(database);
     StartProgram startProgram = new StartProgram(inputParser,
                                                  providerFactory,
                                                  reportConsoleGenerator,

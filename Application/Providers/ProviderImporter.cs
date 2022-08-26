@@ -1,18 +1,18 @@
 ﻿using Application.Generators;
-using Application.Repositories;
 using Domain.ProviderItems;
+using Infrastructure.Repositories;
 
 namespace Application.Providers
 {
     public class ProviderImporter : IProviderImporter
     {
         private IReportConsoleGenerator reportConsoleGenerator;
-        private IRepository repository;
+        private IProductRepository repository;
         private IProvider targetProvider;
 
         public ProviderImporter(IProvider targetProvider,
                                 IReportConsoleGenerator reportConsoleGenerator,
-                                IRepository repository)
+                                IProductRepository repository)
         {
             this.targetProvider = targetProvider;
             this.reportConsoleGenerator = reportConsoleGenerator;

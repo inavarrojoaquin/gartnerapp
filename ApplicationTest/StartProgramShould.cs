@@ -2,9 +2,9 @@ using Application;
 using Application.Generators;
 using Application.Parsers;
 using Application.Providers;
-using Application.Repositories;
 using Domain.DTO;
 using Domain.ProviderItems;
+using Infrastructure.Repositories;
 using NSubstitute;
 
 namespace ApplicationTest
@@ -54,8 +54,8 @@ namespace ApplicationTest
             reportConsoleGenerator
                 .When(x => x.Generate(Arg.Is(items)))
                 .Do(y => generatorCounter++);
-            
-            IRepository repository = Substitute.For<IRepository>();
+
+            IProductRepository repository = Substitute.For<IProductRepository>();
 
             int repositoryCounter = 0;
             repository.When(x => x.Insert(Arg.Any<IProduct>()))

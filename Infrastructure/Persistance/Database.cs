@@ -1,20 +1,29 @@
-﻿using System.Data;
+﻿using Infrastructure.Handlers;
+using System.Data;
+using System.Data.Common;
 
-namespace Application.Database
+namespace Infrastructure.Persistance
 {
-    public abstract class Database
+    public class Database
     {
-        public string connectionString;
+        private readonly IDatabaseSettingsHandler databaseHandler;
 
-        #region Abstract Functions
+        public Database(IDatabaseSettingsHandler databaseHandler)
+        {
+            DbProviderFactories.RegisterFactory(
+                databaseHandler.ProviderInvariantName,
+                MySqlConnector.MySqlConnectorFactory.Instance);
+            
+            this.databaseHandler = databaseHandler;
+        }
+        public IDbConnection CreateOpenConnection()
+        {
+            var factory = DbProviderFactories.GetFactory(databaseHandler.ProviderName);
+            var connection = factory.CreateConnection();
+            connection.ConnectionString = databaseHandler.ConnectionString;
+            connection.Open();
 
-        public abstract IDbConnection CreateConnection();
-        public abstract IDbCommand CreateCommand();
-        public abstract IDbConnection CreateOpenConnection();
-        public abstract IDbCommand CreateCommand(string commandText, IDbConnection connection);
-        public abstract IDbCommand CreateStoredProcCommand(string procName, IDbConnection connection);
-        public abstract IDataParameter CreateParameter(string parameterName, object parameterValue);
-
-        #endregion
+            return connection;
+        }
     }
 }

@@ -1,10 +1,9 @@
 ﻿using Application.Generators;
 using Application.Parsers;
 using Application.Providers;
-using Application.Repositories;
-using Domain.Common;
 using Domain.DTO;
 using Domain.ProviderItems;
+using Infrastructure.Repositories;
 
 namespace Application
 {
@@ -13,12 +12,12 @@ namespace Application
         private readonly IInputParser inputParser;
         private readonly IProviderFactory providerFactory;
         private readonly IReportConsoleGenerator reportConsoleGenerator;
-        private readonly IRepository repository;
+        private readonly IProductRepository repository;
 
         public StartProgram(IInputParser inputParser,
                             IProviderFactory providerFactory,
                             IReportConsoleGenerator reportConsoleGenerator,
-                            IRepository repository)
+                            IProductRepository repository)
         {
             this.inputParser = inputParser;
             this.providerFactory = providerFactory;
@@ -45,7 +44,7 @@ namespace Application
             Console.Write(generatedReport);
 
             // si no hay productos, no hacer nada
-            //providerImporter.Insert(items);
+            providerImporter.Insert(items);
         }
     }
 }
