@@ -2,10 +2,6 @@
 
 namespace Application.Parsers
 {
-    /// <summary>
-    /// This class could be a class implementing a 
-    /// Command Pattern managing the inputs
-    /// </summary>
     public class InputParser : IInputParser
     {
         private string[] args;

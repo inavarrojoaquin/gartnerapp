@@ -21,8 +21,6 @@ namespace ApplicationTest.Providers
             IProvider targetProvider = providerFactory.ProductParse(TestConstants.CAPTERRA, "path", pathGenerator);
 
             Assert.That(targetProvider.GetType(), Is.EqualTo(typeof(CapterraProvider)));
-
-            //Assert.DoesNotThrow(() => targetProvider.Run(TestConstants.CAPTERRA_FILE_PATH));
         }
 
         [Test]
@@ -31,8 +29,6 @@ namespace ApplicationTest.Providers
             IProvider targetProvider = providerFactory.ProductParse(TestConstants.SOFTWAREADVICE, "path", pathGenerator);
 
             Assert.That(targetProvider.GetType(), Is.EqualTo(typeof(SoftwareAdviceProvider)));
-
-            //Assert.DoesNotThrow(() => targetProvider.Run(TestConstants.SOFTWAREADVICE_FILE_PATH));
         }
 
         [Test]

@@ -12,15 +12,7 @@ namespace ApplicationTest
     public class StartProgramShould
     {
         private StartProgram startProgram;
-        //private IProviderFactory providerFactory;
-        //private IDatabaseFactorySectionHandler databaseFactorySectionHandler;
-
-        [SetUp]
-        public void SetUp()
-        {
-            //databaseFactorySectionHandler = Substitute.For<IDatabaseFactorySectionHandler>();
-        }
-
+        
         [Test]
         public void RunAsExpected()
         {
