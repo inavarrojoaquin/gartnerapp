@@ -18,18 +18,14 @@ namespace Application.Providers
             this.reportConsoleGenerator = reportConsoleGenerator;
             this.repository = repository;
         }
-        public ICollection<IProduct> GetItems()
+        public void Import()
         {
-            return targetProvider.GetItems();
-        }
+            ICollection<IProduct> items = targetProvider.GetItems();
 
-        public string Generate(ICollection<IProduct> items)
-        {
-            return reportConsoleGenerator.Generate(items);
-        }
+            string generatedReport = reportConsoleGenerator.Generate(items);
 
-        public void Insert(ICollection<IProduct> items)
-        {
+            Console.Write(generatedReport);
+
             foreach (IProduct item in items)
             {
                 repository.Insert(item);

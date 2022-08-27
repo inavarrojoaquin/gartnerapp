@@ -12,6 +12,8 @@ namespace Application.Generators
 
             StringBuilder report = new StringBuilder();
 
+            report.AppendLine("Importing " + items.Count + " items...");
+
             foreach (var item in items)
             {
                 report.Append("Importing: ");
@@ -37,6 +39,7 @@ namespace Application.Generators
 
                 report.AppendLine();
             }
+            report.AppendLine();
 
             return report.ToString();
         }

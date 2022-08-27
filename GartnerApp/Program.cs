@@ -3,6 +3,7 @@
 using Application;
 using Application.Generators;
 using Application.Parsers;
+using Application.Products;
 using Application.Providers;
 using Infrastructure.Handlers;
 using Infrastructure.Persistance;
@@ -16,14 +17,12 @@ try
         .AddEnvironmentVariables()
         .Build();
 
-    IDatabaseSettingsHandler databaseFactorySectionHandler = new DatabaseSettingsHandler(config);
-
-    Database database = new Database(databaseFactorySectionHandler);
-    
     IInputParser inputParser = new InputParser(args);
     IProviderFactory providerFactory = new ProviderFactory();
     IReportConsoleGenerator reportConsoleGenerator = new ReportConsoleGenerator();
-    IProductRepository repository = new ProductRepository(database);
+    DatabaseSettingsHandler databaseFactorySectionHandler = new DatabaseSettingsHandler(config);
+    Database database = new Database();
+    IProductRepository repository = ProductRepositoryFactory.Create(databaseFactorySectionHandler, database);
     StartProgram startProgram = new StartProgram(inputParser,
                                                  providerFactory,
                                                  reportConsoleGenerator,

@@ -3,22 +3,21 @@ using Microsoft.Extensions.Configuration;
 
 namespace Infrastructure.Handlers
 {
-    public class DatabaseSettingsHandler : IDatabaseSettingsHandler
+    public class DatabaseSettingsHandler
     {
-        public string Name { get; }
-        public string ProviderName { get; }
-        public string ConnectionString { get; }
-        public string ProviderInvariantName { get; }
+        public string SelectedConnectionProviderName { get; }
+        public List<ConnectionProvider> ConnectionProviders { get; }
 
         public DatabaseSettingsHandler(IConfiguration config)
         {
-            ConnectionSetting connectionSetting = config.GetRequiredSection("ConnectionSetting")
-                .Get<ConnectionSetting>();
+            if(config == null)
+                throw new ArgumentNullException("Error: Config is null.");
 
-            Name = connectionSetting.Name;
-            ProviderName = connectionSetting.ProviderName;
-            ConnectionString = connectionSetting.ConnectionString;
-            ProviderInvariantName = connectionSetting.ProviderInvariantName;
+            ConnectionSettings connectionSettings = config.GetRequiredSection("ConnectionSettings")
+                .Get<ConnectionSettings>();
+
+            SelectedConnectionProviderName = connectionSettings.SelectedConnectionProviderName;
+            ConnectionProviders = connectionSettings.ConnectionProviders;
         }
     }
 }

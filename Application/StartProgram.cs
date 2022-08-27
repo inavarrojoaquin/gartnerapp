@@ -27,24 +27,25 @@ namespace Application
 
         public void Run()
         {
+            Console.WriteLine("Program starts\n");
+
             ConsoleInputDTO consoleInputDTO = inputParser.Parse();
 
             IPathGenerator pathGenerator = new PathGenerator();
+            
             IProvider targetProvider = providerFactory.ProductParse(
                 consoleInputDTO.Provider,
                 consoleInputDTO.Path,
                 pathGenerator);
+            
             IProviderImporter providerImporter = new ProviderImporter(
                 targetProvider,
                 reportConsoleGenerator,
                 repository);
-            ICollection<IProduct> items = providerImporter.GetItems();
-            
-            string generatedReport = providerImporter.Generate(items);
-            Console.Write(generatedReport);
 
-            // si no hay productos, no hacer nada
-            providerImporter.Insert(items);
+            providerImporter.Import();
+
+            Console.WriteLine("\nProgram ends");
         }
     }
 }

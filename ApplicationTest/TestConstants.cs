@@ -10,5 +10,7 @@
         public const string SOFTWAREADVICE_RESOURCE_FILE_PATH = "Resources/softwareadvice.json";
         public const string NOT_EXISTS_PATH = "NotExists";
         public const string FEED_PRODUCTS_PATH = "feed-products";
+        public const string MYSQL_CONNECTION_NAME = "MySQLConnection";
+        public const string MONGODB_CONNECTION_NAME = "MongoDBConnection";
     }
 }
