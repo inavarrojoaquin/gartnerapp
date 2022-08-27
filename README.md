@@ -36,4 +36,4 @@
 - It is not the firts time writing unit tests. I daily work with it
 - With more time I would apply:
 > Logging for errors
-> Database implementation
+Database implementation
