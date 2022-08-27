@@ -11,7 +11,7 @@ namespace ApplicationTest.Generators
             PathGenerator pathGenerator = new PathGenerator();
             string targetPath = pathGenerator.Generate(inputPath);
 
-            Assert.That(targetPath, Is.EqualTo(Path.Combine("C:\\", inputPath)));
+            Assert.That(targetPath.EndsWith(Path.Combine("GartnerApp", inputPath)), Is.True);
         }
 
         [Test]

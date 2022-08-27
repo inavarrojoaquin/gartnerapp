@@ -10,9 +10,11 @@ namespace Application.Generators
                 new string[] { "\\", "/" },
                 StringSplitOptions.None);
             string folder = splitedPath[0];
-            
-            var basePath = Path.GetPathRoot(Assembly.GetEntryAssembly().Location);
-            string targetPath = Path.Combine(basePath, folder);
+
+            var basePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+            string[] paths = basePath.Split("GartnerApp");
+
+            string targetPath = Path.Combine(paths[0], "GartnerApp", folder);
 
             if (!Directory.Exists(targetPath))
                 throw new Exception("Error: The folder feed-products does not exists. The folder must be in C: eg. C:\\feed-products\\capterra.yaml");
