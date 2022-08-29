@@ -1,16 +1,17 @@
 # GartnerApp
 
-## Environment development used
+## Development Environment
 - Visual Studio 2022
 - Windows System x64
-- .Net Core 6
+- .NET 6.0
 - NUnit for testing with NSubstitute for mocking
+- Console Application project
 
 ## Installation steps
  1) Download the project from [https://github.com/inavarrojoaquin/gartnerapp](https://github.com/inavarrojoaquin/gartnerapp) 
  2) Open the .sln file with eg. Visual Studio
 
-## To run the program
+## Running the program
 - Option 1:
  1) Run it from Visual Studio
 
@@ -29,13 +30,13 @@
 
 - Inside the project you will find a folder called "feed-products" where the processed files are.
 
-## To run all unit tets from VS
+## Running all unit tets from VS
 - Right click on the solution then right click and "Run tests"
 
 ## Extras
 - It is not the firts time writing unit tests. I daily work with it
 - With more time I would apply:
 > Command Pattern for managing multiple console command inputs
-Database implementation
-Logging for errors
-Managing Exceptions
+> Database implementation
+> Logging for errors
+> Managing Exceptions
