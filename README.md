@@ -35,5 +35,7 @@
 ## Extras
 - It is not the firts time writing unit tests. I daily work with it
 - With more time I would apply:
-> Logging for errors
+> Command Pattern for managing multiple console command inputs
 Database implementation
+Logging for errors
+Managing Exceptions
