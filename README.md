@@ -4,7 +4,7 @@
 - Visual Studio 2022
 - Windows System x64
 - .Net Core 6
-- NSubstitute for testing
+- NUnit for testing with NSubstitute for mocking
 
 ## Installation steps
  1) Download the project from [https://github.com/inavarrojoaquin/gartnerapp](https://github.com/inavarrojoaquin/gartnerapp) 
